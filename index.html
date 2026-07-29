@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="团队投票：创建议题、投票、实时计票，localStorage 防重复。" />
+  <title>团队投票 · TeamVote</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>🗳️ 团队投票</h1>
+      <p>创建议题 · 发起投票 · 实时计票</p>
+    </div>
+  </header>
+
+  <main class="container" id="app">
+    <!-- 首页：议题列表 -->
+    <section class="panel active" id="panelList">
+      <div class="panel-header">
+        <h2>议题列表</h2>
+        <button class="btn btn-primary" id="btnNew">＋ 创建议题</button>
+      </div>
+      <div id="pollList"></div>
+      <p class="empty" id="emptyMsg">还没有议题，点击上方按钮创建。</p>
+    </section>
+
+    <!-- 创建/编辑 -->
+    <section class="panel" id="panelCreate">
+      <h2 id="createTitle">创建议题</h2>
+      <form id="createForm" novalidate>
+        <label class="field">
+          <span>议题标题</span>
+          <input id="inputTitle" type="text" required maxlength="120" placeholder="例：今天午餐吃什么？" />
+        </label>
+        <div id="optionsBox">
+          <div class="option-row"><input type="text" placeholder="选项 1" required maxlength="80" /><button class="btn-remove" type="button" data-action="remove">✕</button></div>
+          <div class="option-row"><input type="text" placeholder="选项 2" required maxlength="80" /><button class="btn-remove" type="button" data-action="remove">✕</button></div>
+        </div>
+        <button class="btn btn-ghost" type="button" id="btnAddOption">＋ 添加选项</button>
+        <p class="error" id="createError" role="alert"></p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">创建并分享</button>
+          <button class="btn" type="button" id="btnCancelCreate">取消</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 投票页 -->
+    <section class="panel" id="panelVote">
+      <h2 id="voteTitle"></h2>
+      <div class="meta" id="voteMeta"></div>
+      <form id="voteForm" novalidate>
+        <fieldset id="voteOptions"></fieldset>
+        <p class="error" id="voteError" role="alert"></p>
+        <button class="btn btn-primary" type="submit">提交投票</button>
+      </form>
+      <div class="results" id="voteResults"></div>
+      <button class="btn" type="button" id="btnBack">← 返回议题列表</button>
+    </section>
+  </main>
+
+  <footer>团队投票 · 数据保存在浏览器 localStorage</footer>
+  <script src="app.js"></script>
+</body>
+</html>
